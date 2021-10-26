@@ -4,4 +4,4 @@
 
 # npm i -D nodemon concurrently
 
-# to run server use " run server"
+# to run server use " npm run server"
