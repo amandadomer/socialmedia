@@ -3,6 +3,9 @@ const connectDB = require("./config/db");
 
 // middleware
 const app = express();
+app.use(
+  express.json({ extended: false })
+); /* Allows us to get data in req.body */
 
 // connect database
 connectDB();
