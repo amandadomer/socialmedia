@@ -6,6 +6,7 @@ const User = require("../../models/User");
 const config = require("config");
 const { check, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
+
 // Get api/auth
 
 router.get("/", auth, async (req, res) => {
@@ -14,7 +15,7 @@ router.get("/", auth, async (req, res) => {
     res.json(user);
   } catch (err) {
     console.error(err.mesage);
-    res.status(500).send("Server Error");
+    res.status(500).send("Server Error 1");
   }
 });
 
@@ -52,8 +53,6 @@ router.post(
           .json({ errors: [{ msg: "Invalid Credentials" }] });
       }
 
-      //Return json webtoken
-
       const payload = {
         user: {
           id: user.id,
@@ -63,7 +62,7 @@ router.post(
       jwt.sign(
         payload,
         config.get("jwtToken"),
-        { expiresIn: 36000000 },
+        { expiresIn: 99999999999999 },
         (err, token) => {
           if (err) throw err;
           res.json({ token });
@@ -71,7 +70,7 @@ router.post(
       );
     } catch (err) {
       console.error(err.message);
-      res.status(500).send("Server error");
+      res.status(500).send("Server error 2");
     }
   }
 );
