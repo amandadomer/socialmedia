@@ -1,17 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
-const Post = require("../../models/Posts");
+const { Comment, Post } = require('../../models/Posts');
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
 const auth = require("../../middleware/auth");
 
 // Get api/post
 
-router.post(
-  "/",
-  [auth, [check("text", "Text is required").not().isEmpty()]],
-  async (req, res) => {
+router.post("/", [auth, [check("text", "Text is required").not().isEmpty()]], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -154,7 +151,10 @@ router.put("/unlike/:id", auth, async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 // POST api/post/comment/:id
 // Comment on a post
 
+=======
+>>>>>>> 2b13c0b393398e81f25433bfbd721e73d9e211f0
 module.exports = router;

@@ -7,6 +7,8 @@ const ProfileSchema = new mongoose.Schema({
   skills: { type: [String], required: true, },
   bio: { type: String, },
   date: { type: Date, default: Date.now, },
+  request: { type:[String], default: []},
+  friends: {type: [String], default: []}
 });
 
 module.exports = Profile = mongoose.model("profile", ProfileSchema);
