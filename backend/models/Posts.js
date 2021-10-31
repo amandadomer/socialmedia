@@ -24,4 +24,4 @@ const Post = mongoose.model('post', PostSchema);
 module.exports = {
   Comment,
   Post
-}
+};

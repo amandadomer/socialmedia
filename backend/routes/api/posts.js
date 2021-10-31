@@ -4,7 +4,7 @@ const { check, validationResult } = require("express-validator");
 const { Comment, Post } = require('../../models/Posts');
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
-const auth = require("../../middleware/auth");
+const auth = require("../../middleware/auth"); 
 
 // Get api/post
 
@@ -151,10 +151,5 @@ router.put("/unlike/:id", auth, async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
-// POST api/post/comment/:id
-// Comment on a post
 
-=======
->>>>>>> 2b13c0b393398e81f25433bfbd721e73d9e211f0
 module.exports = router;

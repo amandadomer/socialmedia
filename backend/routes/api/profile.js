@@ -130,4 +130,7 @@ router.delete("/", auth, async (req, res) => {
   }
 });
 
+router.post('/upload',)
+
+
 module.exports = router;
