@@ -2,7 +2,7 @@ import React from 'react';
 import './SearchBar.css';
 function SearchBar (props) {
       return (
-            <div id = "sbar">
+            <div id="searchBar">
                 <form className="form-inline">
                     <div className= "row form-group">
                         <div className= "col">
