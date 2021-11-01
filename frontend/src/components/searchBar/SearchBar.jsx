@@ -1,5 +1,5 @@
 import React from 'react';
-import './SearchBar.css';
+
 function SearchBar (props) {
       return (
             <div id="searchBar">
@@ -10,7 +10,6 @@ function SearchBar (props) {
                         </div>
                         <div className="col-sm-2">
                         </div>
-                        
                     </div>
                 </form>
             </div>
