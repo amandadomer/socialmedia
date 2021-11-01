@@ -1,0 +1,19 @@
+body {
+    margin: 0;
+    font-family:  Helvetica, sans-serif;
+    background-color: #fdfbf3;
+  }
+  
+.header {
+    font-size: 60px;
+    text-align: center;
+    color: black;
+    margin-top: 30px;
+}
+
+.subHeader {
+    font-size: 30px;
+    text-align: center;
+    color: black;
+};
+
