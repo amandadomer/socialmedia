@@ -24,9 +24,6 @@ router.get("/me", auth, async (req, res) => {
 //route POST api/profile
 //update profile
 
-//route POST api/profile
-//update profile
-
 router.post(
   "/",
   [auth, [check("skills", "Skills is required").not().isEmpty()]],
@@ -129,5 +126,7 @@ router.delete("/", auth, async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
+router.post("/upload");
 
 module.exports = router;
