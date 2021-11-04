@@ -27,9 +27,9 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav text-dark">
             <li className="nav-item active">
-              <a className="nav-link text-dark" href="#">
+              <Link to="/posts" className="nav-link text-dark">
                 News Feed
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
               <a className="nav-link text-dark" href="#">
@@ -78,14 +78,14 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav text-dark">
             <li className="nav-item active">
-              <a className="nav-link text-dark" href="#">
+              <Link to="/login" className="nav-link text-dark">
                 Login
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-dark" href="#">
+              <Link to="/signup" className="nav-link text-dark">
                 Sign Up
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

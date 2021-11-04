@@ -10,6 +10,9 @@ import SignUp from "./components/signUp/SignUp";
 import Posts from "./components/posts/Posts";
 import "./App.css";
 import Alert from "./components/landing/Alert";
+
+import PrivateRoute from "./routing/PrivateRoute";
+
 //Redux
 import { Provider } from "react-redux";
 import store from "./store";
@@ -31,6 +34,8 @@ const App = () => {
           <Switch>
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/login" component={Login} />
+            <PrivateRoute exact path="/home" component={Home} />
+            <PrivateRoute exact path="/posts" component={Posts} />
           </Switch>
         </Fragment>
       </Router>

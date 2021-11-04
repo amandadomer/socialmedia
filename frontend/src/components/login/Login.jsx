@@ -57,11 +57,9 @@ const Login = ({ login, isAuthenticated }) => {
             value={password}
             minLength="6"
           />
-          <div className="buttons">
-            <Link to="/login" className="btn btn-light">
-              Login
-            </Link>
-          </div>
+          <button type="submit" className="btn">
+            Submit
+          </button>
           <br></br>
           Don't have an account? Sign up <Link to="/signup">here.</Link>
         </div>
