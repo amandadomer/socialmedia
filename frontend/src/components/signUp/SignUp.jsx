@@ -5,8 +5,9 @@ import "./SignUp.css";
 import { setAlert } from "../../actions/alert";
 import { register } from "../../actions/auth";
 import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
 
-const SignUp = ({ setAlert, register }) => {
+const SignUp = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -27,6 +28,10 @@ const SignUp = ({ setAlert, register }) => {
       register({ name, email, password });
     }
   };
+
+  if (isAuthenticated) {
+    return <Redirect to="/home" />;
+  }
   return (
     <Fragment>
       <div className="row align-items-center">
@@ -101,6 +106,11 @@ const SignUp = ({ setAlert, register }) => {
 SignUp.propTypes = {
   setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
 };
 
-export default connect(null, { setAlert, register })(SignUp);
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { setAlert, register })(SignUp);
