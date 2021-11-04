@@ -1,11 +1,19 @@
-import React from 'react'
+import React from "react";
+import "./Posts.css";
 
-function Posts() {
-    return (
-        <div className="posts">
-          posts
-      </div>
-    )
+function Post() {
+  return (
+    <div className="post">
+      <form>
+        <label>
+          Share something<br></br>
+          <input type="text" name="name" className="textBox" />
+        </label>
+        <br></br>
+        <input type="submit" className="btn" value="Post" />
+      </form>
+    </div>
+  );
 }
 
-export default Posts;
+export default Post;

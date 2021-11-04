@@ -1,3 +1,18 @@
-.posts {
-    flex: 8;
+.post {
+  background-color: white;
+  width: 600px;
+  border-radius: 10px;
+  padding: 10px 20px 20px;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  margin-left: 100px;
+  text-align: center;
+  font-size: 20px;
+  color: black;
+  border: 2px solid black;
+}
+
+.textBox {
+  width: 400px;
+  height: 100px;
 }
