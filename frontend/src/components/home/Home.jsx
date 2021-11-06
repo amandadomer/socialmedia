@@ -13,7 +13,7 @@ const Home = ({
 }) => {
   useEffect(() => {
     getProfile();
-  }, []);
+  }, [getProfile]);
 
   return loading && profile === null ? (
     <h1>Loading...</h1>

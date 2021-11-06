@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { getPosts } from "../../actions/post";
 import PostItem from "./PostItem";
 import "./Posts.css";
+import PostForm from "./PostForm";
 
 const Post = ({ getPosts, post: { post, loading } }) => {
   useEffect(() => {
@@ -11,10 +12,11 @@ const Post = ({ getPosts, post: { post, loading } }) => {
   }, [getPosts]);
   return (
     <Fragment>
+      <PostForm />
       <div className="posts">
-        {/* {post.map((post) => (
+        {post.map((post) => (
           <PostItem key={post._id} post={post} />
-        ))} */}
+        ))}
         <form>
           <label>
             Share something<br></br>

@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect } from "react";
-import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Landing from "./components/landing/Landing";
 import NavBar from "./components/navBar/NavBar";
@@ -10,6 +9,7 @@ import Posts from "./components/posts/Posts";
 import "./App.css";
 import Alert from "./components/landing/Alert";
 import CreateProfile from "./components/profile/CreateProfile";
+
 import PrivateRoute from "./routing/PrivateRoute";
 
 //Redux
@@ -18,7 +18,11 @@ import store from "./store";
 import { loadUser } from "./actions/auth";
 import setAuthToken from "./utils/AuthToken";
 import EditProfile from "./components/profile/EditProfile";
+import Profiles from "./components/profiles/Profiles";
 
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 const App = () => {
   useEffect(() => {
     store.dispatch(loadUser());
@@ -34,6 +38,8 @@ const App = () => {
           <Switch>
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/profiles" component={Profiles} />
+            <Route exact path="/profile/:id" component={Profiles} />
             <PrivateRoute exact path="/home" component={Home} />
             <PrivateRoute exact path="/posts" component={Posts} />
             <PrivateRoute

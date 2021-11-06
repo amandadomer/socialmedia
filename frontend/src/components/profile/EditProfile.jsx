@@ -33,7 +33,7 @@ const EditProfile = ({
       skills: loading || !profile.sills ? "" : profile.skills.join(","),
       bio: loading || !profile.bio ? "" : profile.bio,
     });
-  }, [loading]);
+  }, [loading, getProfile]);
   return (
     <Fragment>
       <h1 className="large text-primary">Create Your Profile</h1>
@@ -49,7 +49,7 @@ const EditProfile = ({
             placeholder="Location"
             name="location"
             value={location}
-            oneChange={(e) => onChange(e)}
+            onChange={(e) => onChange(e)}
           />
           <small className="form-text">City & state (eg. Boston, MA)</small>
         </div>
@@ -59,7 +59,7 @@ const EditProfile = ({
             placeholder="* Skills"
             name="skills"
             value={skills}
-            oneChange={(e) => onChange(e)}
+            onChange={(e) => onChange(e)}
           />
           <small className="form-text">
             Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)
@@ -70,7 +70,7 @@ const EditProfile = ({
             placeholder="A short bio of yourself"
             name="bio"
             value={bio}
-            oneChange={(e) => onChange(e)}
+            onChange={(e) => onChange(e)}
           ></textarea>
           <small className="form-text">Tell us a little about yourself</small>
         </div>

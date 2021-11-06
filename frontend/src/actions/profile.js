@@ -1,7 +1,12 @@
 import axios from "axios";
 import { setAlert } from "./alert";
 
-import { GET_PROFILE, GET_PROFILES, PROFILE_ERROR } from "./types";
+import {
+  CLEAR_PROFILE,
+  GET_PROFILE,
+  GET_PROFILES,
+  PROFILE_ERROR,
+} from "./types";
 
 // Get current users profile
 export const getProfile = () => async (dispatch) => {
@@ -23,7 +28,25 @@ export const getProfile = () => async (dispatch) => {
 //Get all profiles
 export const getProfiles = () => async (dispatch) => {
   try {
+    dispatch({ type: CLEAR_PROFILE });
     const res = await axios.get("/api/profile");
+
+    dispatch({
+      type: GET_PROFILES,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+//Get all by ID
+export const getProfilesById = (userID) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/profile/user/${userID}`);
 
     dispatch({
       type: GET_PROFILES,

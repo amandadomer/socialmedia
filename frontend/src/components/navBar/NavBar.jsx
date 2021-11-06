@@ -31,9 +31,9 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
               </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-dark" href="#">
+              <Link className="nav-link text-dark" to="/profiles">
                 Profile
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
               <a className="nav-link text-dark" href="#">

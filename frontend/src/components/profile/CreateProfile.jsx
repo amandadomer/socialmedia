@@ -13,9 +13,9 @@ const CreateProfile = ({ createProfile, history }) => {
 
   const { location, skills, bio } = formData;
 
-  const onChange = (e) =>
+  const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-
+  };
   const onSubmit = (e) => {
     e.preventDefault();
     createProfile(formData, history);
@@ -36,7 +36,7 @@ const CreateProfile = ({ createProfile, history }) => {
             placeholder="Location"
             name="location"
             value={location}
-            oneChange={(e) => onChange(e)}
+            onChange={(e) => onChange(e)}
           />
           <small className="form-text">City & state (eg. Boston, MA)</small>
         </div>
@@ -46,7 +46,7 @@ const CreateProfile = ({ createProfile, history }) => {
             placeholder="* Skills"
             name="skills"
             value={skills}
-            oneChange={(e) => onChange(e)}
+            onChange={(e) => onChange(e)}
           />
           <small className="form-text">
             Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)
@@ -57,7 +57,7 @@ const CreateProfile = ({ createProfile, history }) => {
             placeholder="A short bio of yourself"
             name="bio"
             value={bio}
-            oneChange={(e) => onChange(e)}
+            onChange={(e) => onChange(e)}
           ></textarea>
           <small className="form-text">Tell us a little about yourself</small>
         </div>
