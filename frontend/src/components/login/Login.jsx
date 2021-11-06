@@ -28,7 +28,7 @@ const Login = ({ login, isAuthenticated }) => {
   const { email, password } = formData;
   return (
     <Fragment>
-      <form>
+      <form onSubmit={onSubmit}>
         <div className="card">
           <label for="exampleInputEmail1" className="form-label">
             Email address:

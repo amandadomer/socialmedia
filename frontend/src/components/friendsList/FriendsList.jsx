@@ -1,8 +1,26 @@
-import React from "react";
-import "./FriendsList.css";
+// import React from 'react'
+// import './FriendsList.css'
 
-function FriendsList(props) {
-  return <div className="friends">Your Friends</div>;
-}
+// function FriendsList(props) {
+//     const [friends, setFriends] = useState([]);
+//     useEffect(() => {
+//         const getFriends = async () => {
+//           try {
+//             const friendList = await axios.get("/users/friends/" + user._id);
+//             setFriends(friendList.data);
+//           } catch (err) {
+//             console.log(err);
+//           }
+//         };
+//         getFriends();
+//       }, [user]);
 
-export default FriendsList;
+//     return (
+//         <div className="friends">
+//             Your Friends<br></br>
+//             {props.friends.map((friend))}
+//         </div>
+//     )
+// }
+
+// export default FriendsList;

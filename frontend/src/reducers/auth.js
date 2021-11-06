@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import {
   SIGNUP_SUCCESS,
   SIGNUP_FAIL,

@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import SearchBar from "../searchBar/SearchBar";
 import "./NavBar.css";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -10,9 +9,9 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
     <div className="navBar text-dark">
       <nav className="navbar navbar-expand-lg">
-        <a className="navbar-brand text-dark" href="#">
+        <Link to="/home" className="navbar-brand text-dark" href="#">
           devWeb
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -42,6 +41,11 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
               </a>
             </li>
             <li className="nav-item">
+              <a className="nav-link text-dark" href="#">
+                All Users
+              </a>
+            </li>
+            <li className="nav-item">
               <a
                 onClick={logout}
                 href="#!"
@@ -52,7 +56,6 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
               </a>
             </li>
           </ul>
-          <SearchBar />
         </div>
       </nav>
     </div>
@@ -61,20 +64,6 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const guestLinks = (
     <div className="navBar text-dark">
       <nav className="navbar navbar-expand-lg">
-        <a className="navbar-brand text-dark" href="#">
-          devWeb
-        </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav text-dark">
             <li className="nav-item active">

@@ -1,10 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { Link, Redirect } from "react-router-dom";
 import Login from "../login/Login";
 import "./Landing.css";
 
-function Landing() {
+const Landing = ({ isAuthenticated }) => {
+  if (isAuthenticated) {
+    return <Redirect to="/home" />;
+  }
   return (
     <div className="row align-items-center">
       <div className="col-6">
@@ -18,6 +24,14 @@ function Landing() {
       </div>
     </div>
   );
-}
+};
 
-export default Landing;
+Landing.propTypes = {
+  isAuthenticated: PropTypes.bool,
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(Landing);

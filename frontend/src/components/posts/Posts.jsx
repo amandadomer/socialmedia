@@ -11,7 +11,7 @@ const Post = ({ getPosts, post: { post, loading } }) => {
   }, [getPosts]);
   return (
     <Fragment>
-      <div className="post">
+      <div className="posts">
         {/* {post.map((post) => (
           <PostItem key={post._id} post={post} />
         ))} */}

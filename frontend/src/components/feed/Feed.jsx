@@ -4,19 +4,18 @@ import "./Feed.css";
 function Feed() {
   return (
     <div className="feed">
-      this is a test post. hello Lorem ipsum dolor sit amet consectetur
-      adipisicing elit. Autem, nesciunt architecto consectetur atque reiciendis
-      quasi porro asperiores excepturi consequuntur nemo labore quaerat
-      quibusdam eos corrupti placeat tenetur, natus cumque rem. Lorem ipsum
-      dolor sit amet, consectetur adipisicing elit. Accusantium labore
-      voluptatum ut animi nam. Corrupti libero ab asperiores dolor at odio
-      aperiam porro cum sed inventore sit, quis molestiae consequuntur! Lorem
-      ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis quaerat
-      similique ab ex reiciendis corrupti fugiat sint rem voluptatem temporibus,
-      asperiores debitis, numquam in, excepturi eaque corporis non vel iure.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem at cum
-      libero, expedita, ad dolorem minima magni numquam asperiores eaque error
-      nemo distinctio ratione temporibus eius soluta nesciunt illo magnam.
+      Your Friend's Name<br></br>
+      this is my photo of a mountain
+      <img
+        className="postImg"
+        src="https://images.unsplash.com/photo-1635067907927-308f0ce72607?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2064&q=80"
+      ></img>
+      <span className="postDate">an hour ago</span>
+      <br></br>
+      <span className="postLikeCount">
+        like<br></br>
+        10 people like this
+      </span>
     </div>
   );
 }
