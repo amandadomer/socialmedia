@@ -36,24 +36,19 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
               </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-dark" href="#">
+              <Link className="nav-link text-dark" to="#">
                 Friends
-              </a>
+              </Link>
             </li>
-            <li className="nav-item">
-              <a className="nav-link text-dark" href="#">
+            {/* <li className="nav-item">
+              <Link className="nav-link text-dark" href="#">
                 All Users
               </a>
-            </li>
+            </li> */}
             <li className="nav-item">
-              <a
-                onClick={logout}
-                href="#!"
-                className="nav-link text-dark"
-                href="#"
-              >
+              <Link onClick={logout} to="#!" className="nav-link text-dark">
                 Logout
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -84,10 +79,6 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
   return (
     <div className="navBar text-dark">
       <nav className="navbar navbar-expand-lg">
-        <Link className="navbar-brand text-dark" href="#">
-          devWeb
-        </Link>
-
         {!loading && (
           <Fragment> {isAuthenticated ? authLinks : guestLinks}</Fragment>
         )}

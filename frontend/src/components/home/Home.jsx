@@ -5,6 +5,7 @@ import "./Home.css";
 import { connect } from "react-redux";
 import { getProfile } from "../../actions/profile";
 import HomeActions from "./HomeActions";
+import Spinner from "../spinner/Spinner";
 
 const Home = ({
   getProfile,
@@ -16,12 +17,12 @@ const Home = ({
   }, [getProfile]);
 
   return loading && profile === null ? (
-    <h1>Loading...</h1>
+    <Spinner />
   ) : (
     <Fragment>
-      <h1> Home </h1>
-      <p>
-        <i className="fas fa-user"> Welcome {user && user.name}</i>
+      <h1 className="large text-primary">Home</h1>
+      <p className="lead">
+        <i className="fas fa-user" /> Welcome {user && user.name}
       </p>
       {profile !== null ? (
         <Fragment>
@@ -29,8 +30,8 @@ const Home = ({
         </Fragment>
       ) : (
         <Fragment>
-          <p> You haven't created a profile yet. Click here to add info</p>
-          <Link to="/create-profile" className="btn btn-primary">
+          <p>You have not yet setup a profile, please add some info</p>
+          <Link to="/create-profile" className="btn btn-primary my-1">
             Create Profile
           </Link>
         </Fragment>

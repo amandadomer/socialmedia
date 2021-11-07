@@ -9,7 +9,8 @@ import Posts from "./components/posts/Posts";
 import "./App.css";
 import Alert from "./components/landing/Alert";
 import CreateProfile from "./components/profile/CreateProfile";
-
+import EditProfile from "./components/profile/EditProfile";
+import Profiles from "./components/profiles/Profiles";
 import PrivateRoute from "./routing/PrivateRoute";
 
 //Redux
@@ -17,8 +18,6 @@ import { Provider } from "react-redux";
 import store from "./store";
 import { loadUser } from "./actions/auth";
 import setAuthToken from "./utils/AuthToken";
-import EditProfile from "./components/profile/EditProfile";
-import Profiles from "./components/profiles/Profiles";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);

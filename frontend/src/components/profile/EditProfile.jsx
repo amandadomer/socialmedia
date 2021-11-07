@@ -16,6 +16,16 @@ const EditProfile = ({
     bio: "",
   });
 
+  useEffect(() => {
+    getProfile();
+
+    setFormData({
+      location: loading || !profile.location ? "" : profile.location,
+      skills: loading || !profile.skills ? "" : profile.skills.join(","),
+      bio: loading || !profile.bio ? "" : profile.bio,
+    });
+  }, [loading, getProfile]);
+
   const { location, skills, bio } = formData;
 
   const onChange = (e) =>
@@ -26,14 +36,6 @@ const EditProfile = ({
     createProfile(formData, history, true);
   };
 
-  useEffect(() => {
-    getProfile();
-    setFormData({
-      location: loading || !profile.location ? "" : profile.location,
-      skills: loading || !profile.sills ? "" : profile.skills.join(","),
-      bio: loading || !profile.bio ? "" : profile.bio,
-    });
-  }, [loading, getProfile]);
   return (
     <Fragment>
       <h1 className="large text-primary">Create Your Profile</h1>
@@ -92,6 +94,7 @@ EditProfile.propTypes = {
 const mapStateToProps = (state) => ({
   profile: state.profile,
 });
+
 export default connect(mapStateToProps, { createProfile, getProfile })(
   withRouter(EditProfile)
 );
