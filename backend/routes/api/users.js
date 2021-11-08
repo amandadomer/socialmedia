@@ -5,23 +5,24 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const User = require("../../models/User");
+const gravatar = require("gravatar");
 // POST api/users
 
 router.post(
   "/",
   [
     check("name", "Name is required").not().isEmpty(),
-    check("email", "Enter a valid email").isEmail(),
-    check("password", "Enter a password with 5 or more charaters").isLength({
-      min: 6,
-    }),
+    check("email", "Please include a valid email").isEmail(),
+    check(
+      "password",
+      "Please enter a password with 6 or more characters"
+    ).isLength({ min: 6 }),
   ],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-
     // make sure user exists
 
     const { name, email, password } = req.body;
@@ -32,12 +33,19 @@ router.post(
       if (user) {
         return res
           .status(400)
-          .json({ errors: [{ msg: "This user exists already" }] });
+          .json({ errors: [{ msg: "User already exists" }] });
       }
+
+      const avatar = gravatar.url(email, {
+        s: "200",
+        r: "pg",
+        d: "mm",
+      });
 
       user = new User({
         name,
         email,
+        avatar,
         password,
       });
       //Encrypt password
@@ -47,7 +55,7 @@ router.post(
 
       user.password = await bcrypt.hash(password, salt);
 
-      user.save(); /*Saves user into the database */
+      await user.save(); /*Saves user into the database */
 
       //Return json webtoken
 

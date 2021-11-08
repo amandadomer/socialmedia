@@ -4,17 +4,19 @@ const auth = require("../../middleware/auth");
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
 const { check, validationResult } = require("express-validator");
+const Post = require("../../models/Posts");
 
 //route Get api/profile/me
 router.get("/me", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne(
       { user: req.user.id } /*Connects to user in model to find by id */
-    ).populate("user", ["name"]); //use populate to add to from user model to the query
+    ).populate("user", ["name", "avatar"]); //use populate to add to from user model to the query
 
     if (!profile) {
       return res.status(400).json({ msg: "No profile for this user" });
     }
+    res.json(profile);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -41,7 +43,7 @@ router.post(
     // get the user from request . userid
     profileFields.user = req.user.id;
     if (location) profileFields.location = location;
-    if (bio) profileFields.location = bio;
+    if (bio) profileFields.bio = bio;
     if (skills) {
       profileFields.skills = skills.split(",").map((skill) => skill.trim()); //split turns everything into an array and map makes it so it doesn't matter how many commas you use
     }
@@ -49,24 +51,12 @@ router.post(
     //update and insert data
 
     try {
-      let profile = await Profile.findOne({ user: req.user.id });
-
-      if (profile) {
-        //update. IF user profile is found
-        profile = await Profile.findOneAndUpdate(
-          { user: req.user.id },
-          { $set: profileFields },
-          { new: true }
-        );
-
-        return res.json(profile);
-      }
-
-      // Create. Create if profile is not found
-
-      profile = new Profile(profileFields);
-
-      await profile.save();
+      // Using upsert option (creates new doc if no match is found):
+      let profile = await Profile.findOneAndUpdate(
+        { user: req.user.id },
+        { $set: profileFields },
+        { new: true, upsert: true }
+      );
       res.json(profile);
     } catch (err) {
       console.error(err.message);
@@ -75,12 +65,24 @@ router.post(
   }
 );
 
+//     // Create. Create if profile is not found
+
+//     profile = new Profile(profileFields);
+
+//     await profile.save();
+//     res.json(profile);
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send("Server Error");
+//   }
+// }
+
 //GET api/profile
 //Get all profiles
 
 router.get("/", async (req, res) => {
   try {
-    const profiles = await Profile.find().populate("user", ["name"]);
+    const profiles = await Profile.find().populate("user", ["name", "avatar"]);
     res.json(profiles);
   } catch (err) {
     console.error(err.message);
@@ -95,11 +97,11 @@ router.get("/user/:user_id", async (req, res) => {
   try {
     const profile = await Profile.findOne({
       user: req.params.user_id,
-    }).populate("user", ["name"]);
+    }).populate("user", ["name", "avatar"]);
 
-    //Check if there is a profile
     if (!profile) return res.status(400).json({ msg: "Profile not found" });
-    res.json(profiles);
+
+    res.json(profile);
   } catch (err) {
     console.error(err.message);
     if (err.kind == "ObjectId") {
@@ -114,10 +116,8 @@ router.get("/user/:user_id", async (req, res) => {
 
 router.delete("/", auth, async (req, res) => {
   try {
-    // Remove posts
-    //Remove profile
+    await Post.deleteMany({ user: req.user.id });
     await Profile.findOneAndRemove({ user: req.user.id });
-
     await User.findOneAndRemove({ _id: req.user.id });
 
     res.json({ msg: "User deleted" });
@@ -126,7 +126,5 @@ router.delete("/", auth, async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
-
-router.post("/upload");
 
 module.exports = router;
