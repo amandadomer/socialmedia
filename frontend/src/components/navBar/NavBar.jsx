@@ -9,7 +9,7 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
     <div className="navBar text-dark">
       <nav className="navbar navbar-expand-lg">
-        <Link to="/home" className="navbar-brand text-dark" href="#">
+        <Link to="/home" className="navbar-brand text-dark" href="/">
           devWeb
         </Link>
         <button
@@ -27,12 +27,12 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
           <ul className="navbar-nav text-dark">
             <li className="nav-item active">
               <Link to="/posts" className="nav-link text-dark">
-                News Feed
+                NewsFeed
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link text-dark" to="/profiles">
-                Profile
+                Profiles
               </Link>
             </li>
             <li className="nav-item">
@@ -40,11 +40,6 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
                 Friends
               </Link>
             </li>
-            {/* <li className="nav-item">
-              <Link className="nav-link text-dark" href="#">
-                All Users
-              </a>
-            </li> */}
             <li className="nav-item">
               <Link onClick={logout} to="#!" className="nav-link text-dark">
                 Logout
@@ -61,6 +56,11 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
       <nav className="navbar navbar-expand-lg">
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav text-dark">
+            <li className="nav-item">
+              <Link className="nav-link text-dark" to="/profiles">
+                Profiles
+              </Link>
+            </li>
             <li className="nav-item active">
               <Link to="/login" className="nav-link text-dark">
                 Login

@@ -1,33 +1,46 @@
-import React, { useState, useEffect } from "react";
-import NavBar from "../navBar/NavBar";
-import "./AllUsers.css";
-import axios from "axios";
+import React, { Fragment, useEffect } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import Spinner from "../spinner/Spinner";
+import ProfileItem from "../profiles/ProfileItem";
+import { getProfiles } from "../../actions/profile";
 
-function AllUsers(props) {
-  const [users, setUsers] = useState([]);
-
+const AllUsers = ({ getProfiles, profile: { profiles, loading } }) => {
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/profile")
-      .then((response) => setUsers(response.data))
-      .then((response) => console.log(response));
-  }, []);
+    getProfiles();
+  }, [getProfiles]);
 
   return (
-    <div>
-      <div>
-        <NavBar />
-      </div>
-      <div className="allUsers">
-        <ul>
-          {users &&
-            users.map((el) => {
-              return <li>{el.user.name}</li>;
-            })}
-        </ul>
-      </div>
-    </div>
+    <Fragment>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <Fragment>
+          <h1 className="Allusers">Profiles</h1>
+          <p className="lead">
+            <i className="fab fa-connectdevelop" /> Be freind other users
+          </p>
+          <div className="profiles">
+            {profiles.length > 0 ? (
+              profiles.map((profile) => (
+                <ProfileItem key={profile._id} profile={profile} />
+              ))
+            ) : (
+              <h4>No profiles found...</h4>
+            )}
+          </div>
+        </Fragment>
+      )}
+    </Fragment>
   );
-}
+};
+AllUsers.propTypes = {
+  getProfiles: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
+};
 
-export default AllUsers;
+const mapStateToProps = (state) => ({
+  profile: state.profile,
+});
+
+export default connect(mapStateToProps, { getProfiles })(AllUsers);

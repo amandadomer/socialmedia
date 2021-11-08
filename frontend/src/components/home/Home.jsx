@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./Home.css";
 import { connect } from "react-redux";
-import { getProfile } from "../../actions/profile";
+import { getProfile, deleteAccount } from "../../actions/profile";
 import HomeActions from "./HomeActions";
 import Spinner from "../spinner/Spinner";
 
 const Home = ({
   getProfile,
+  deleteAccount,
   auth: { user },
   profile: { profile, loading },
 }) => {
@@ -27,6 +28,11 @@ const Home = ({
       {profile !== null ? (
         <Fragment>
           <HomeActions />
+          <div className="my-2">
+            <button className="btn btn-danger" onClick={() => deleteAccount()}>
+              <i className="fas fa-user-minus" /> Delete My Account
+            </button>
+          </div>
         </Fragment>
       ) : (
         <Fragment>
@@ -41,7 +47,8 @@ const Home = ({
 };
 
 Home.propTypes = {
-  getProfile: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
+  deleteAccount: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
 };
@@ -51,4 +58,4 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export default connect(mapStateToProps, { getProfile })(Home);
+export default connect(mapStateToProps, { getProfile, deleteAccount })(Home);

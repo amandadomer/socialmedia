@@ -2,31 +2,33 @@ import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { getProfileById } from "../../actions/profile";
+import { getProfilesById } from "../../actions/profile";
 import ProfileTop from "./ProfileTop";
 import ProfileAbout from "./ProfileAbout";
+import Spinner from "../spinner/Spinner";
 
 const Profile = ({
-  getProfileById,
+  getProfilesById,
   profile: { profile, loading },
   auth,
   match,
 }) => {
   useEffect(() => {
-    getProfileById(match.params.id);
-  }, [getProfileById, match.params.id]);
+    getProfilesById(match.params.id);
+  }, [getProfilesById, match.params.id]);
+
   return (
     <Fragment>
       {profile === null || loading ? (
-        <h1>Loading...</h1>
+        <Spinner />
       ) : (
         <Fragment>
-          <Link to="profiles" className="btn btn-light">
-            Back to Profiles
+          <Link to="/profiles" className="btn btn-light">
+            Back To Profiles
           </Link>
-          {auth.isAuthenticaed &&
+          {auth.isAuthenticated &&
             auth.loading === false &&
-            auth.user._id === profile.user.__id && (
+            auth.user._id === profile.user._id && (
               <Link to="/edit-profile" className="btn btn-dark">
                 Edit Profile
               </Link>
@@ -52,4 +54,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { getProfileById })(Profile);
+export default connect(mapStateToProps, { getProfilesById })(Profile);

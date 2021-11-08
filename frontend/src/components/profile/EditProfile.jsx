@@ -24,7 +24,7 @@ const EditProfile = ({
       skills: loading || !profile.skills ? "" : profile.skills.join(","),
       bio: loading || !profile.bio ? "" : profile.bio,
     });
-  }, [loading, getProfile]);
+  }, [loading, getProfile, profile.location, profile.skills, profile.bio]);
 
   const { location, skills, bio } = formData;
 
@@ -38,10 +38,9 @@ const EditProfile = ({
 
   return (
     <Fragment>
-      <h1 className="large text-primary">Create Your Profile</h1>
+      <h1 className="large text-primary">Edit Profile</h1>
       <p className="lead">
-        <i className="fas fa-user"></i> Let's get some information to make your
-        profile stand out
+        <i className="fas fa-user" /> Add changes to your profile
       </p>
       <small>* = required field</small>
       <form className="form" onSubmit={(e) => onSubmit(e)}>
@@ -53,7 +52,9 @@ const EditProfile = ({
             value={location}
             onChange={(e) => onChange(e)}
           />
-          <small className="form-text">City & state (eg. Boston, MA)</small>
+          <small className="form-text">
+            City & state suggested (eg. Houston, TX)
+          </small>
         </div>
         <div className="form-group">
           <input
@@ -73,9 +74,10 @@ const EditProfile = ({
             name="bio"
             value={bio}
             onChange={(e) => onChange(e)}
-          ></textarea>
+          />
           <small className="form-text">Tell us a little about yourself</small>
         </div>
+
         <input type="submit" className="btn btn-primary my-1" />
         <Link className="btn btn-light my-1" to="/home">
           Go Back
@@ -87,7 +89,7 @@ const EditProfile = ({
 
 EditProfile.propTypes = {
   createProfile: PropTypes.func.isRequired,
-  getProfile: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
 };
 
